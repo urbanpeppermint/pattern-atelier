@@ -12,6 +12,7 @@ import { setLang, t, garmentName } from "./I18n";
 import { AtelierFace, HOTSPOTS, AtelierScreenId, Hotspot } from "./AtelierFace";
 import { LangDropdown } from "./LangDropdown";
 import { SurfacePlacer } from "./SurfacePlacer";
+import { UiPanelRig } from "./UiPanelRig";
 
 const SIZE_LABELS = ["XXS", "XS", "S", "M", "L", "XL", "2XL", "3XL", "4XL"];
 const SIZES_F = [
@@ -130,6 +131,8 @@ export class AppFlow extends BaseScriptComponent {
       this.measurements = "mujer, talle M: busto 93, cintura 75, cadera 101";
       this.seedCards();
     }
+
+    this.armUiPanel();
 
     const delay = this.createEvent("DelayedCallbackEvent") as DelayedCallbackEvent;
     delay.bind(() => this.enterLanding());
@@ -372,6 +375,21 @@ export class AppFlow extends BaseScriptComponent {
     const delay = this.createEvent("DelayedCallbackEvent") as DelayedCallbackEvent;
     delay.bind(() => this.enterPreview(0));
     delay.reset(0.6);
+  }
+
+  private armUiPanel() {
+    if (!this.ok(this.atelierFace)) {
+      return;
+    }
+    const ui = this.atelierFace.getSceneObject().getParent();
+    if (ui === null || isNull(ui)) {
+      return;
+    }
+    let rig = ui.getComponent(UiPanelRig.getTypeName()) as UiPanelRig;
+    if (rig === null || isNull(rig)) {
+      rig = ui.createComponent(UiPanelRig.getTypeName()) as UiPanelRig;
+    }
+    rig.arm();
   }
 
   private armPlacement() {

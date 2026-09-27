@@ -1653,9 +1653,9 @@
     {}
   ScriptInputs:
     "":
-      openAIToken: "[INSERT OPENAI TOKEN HERE]"
-      googleToken: "[INSERT GOOGLE TOKEN HERE]"
-      snapToken: "[INSERT SNAP TOKEN HERE]"
+      openAIToken: "[INSERT OPENAI TOKEN HERE]" OPENAI TOKEN HERE]"
+      googleToken: "[INSERT GOOGLE TOKEN HERE]" GOOGLE TOKEN HERE]"
+      snapToken: "[INSERT SNAP TOKEN HERE]" SNAP TOKEN HERE]"
   ScriptTypes:
     "":
       {}
@@ -2607,8 +2607,26 @@
     - !<own> 4bf0ee28-f20e-4653-a3b4-6eda21fbb92d
     - !<own> dfb1e42d-f8a0-4e6e-8d5f-f4b64b49cc07
     - !<own> f8f428f0-c444-4964-bbc7-b2a6fd3a9682
+    - !<own> a7c3e1b4-6d20-4f8a-9c55-1b0e8a77d4c2
   Components:
     - !<own> 3ed86552-4ac3-41d3-8d79-e7c145489dc2
+- !<SceneObject/a7c3e1b4-6d20-4f8a-9c55-1b0e8a77d4c2>
+  PrefabRemaps:
+    []
+  Name: UiHandle
+  Enabled: true
+  Layers: 1
+  LocalTransform: !<TransformEntity>
+    Position: {x: 34.000000, y: -16.000000, z: 4.000000}
+    Rotation: {x: 0.000000, y: 0.000000, z: 0.000000}
+    Scale: {x: 1.000000, y: 1.000000, z: 1.000000}
+    HasSegmentScaleCompensation: false
+  Children:
+    []
+  Components:
+    - !<own> b81f4c20-9a55-4e17-8d66-2c4a91e0b7d3
+    - !<own> c92e5d31-0b66-4f28-9e77-3d5b02f1c8e4
+    - !<own> d03f6e42-1c77-4039-af88-4e6c13a2d9f5
 - !<SceneObject/c379df8f-498c-4c54-a558-bb0a021b9dad>
   PrefabRemaps:
     []
@@ -3362,3 +3380,108 @@
     - !<own> 929164ef-2d41-474a-a457-1bf03d6cd9f1
   Components:
     []
+- !<ScriptComponent/b81f4c20-9a55-4e17-8d66-2c4a91e0b7d3>
+  PrefabRemaps:
+    []
+  Name: HandleSetup
+  Enabled: true
+  ScriptAsset: !<reference> 6783a423-8cb2-4d86-bf2e-15d6fffcd61d
+  ScriptInputsDefault:
+    material: true
+  ScriptTypesDefault:
+    {}
+  ScriptInputs:
+    "":
+      material: !<reference.Material> 8af93db2-2104-4ec7-a86a-bda06456d429
+  ScriptTypes:
+    "":
+      {}
+- !<ScriptComponent/c92e5d31-0b66-4f28-9e77-3d5b02f1c8e4>
+  PrefabRemaps:
+    []
+  Name: Interactable
+  Enabled: true
+  ScriptAsset: !<reference> 652e631a-22d0-4941-9f74-2943df59f34c
+  ScriptInputsDefault:
+    targetingMode: true
+    targetingVisual: true
+    ignoreInteractionPlane: true
+    keepHoverOnTrigger: true
+    isScrollable: true
+    allowMultipleInteractors: true
+    enablePokeDirectionality: true
+    acceptableXDirections: true
+    acceptableYDirections: true
+    acceptableZDirections: true
+  ScriptTypesDefault:
+    {}
+  ScriptInputs:
+    "":
+      targetingMode: !<float> 3.000000
+      targetingVisual: !<float> 1.000000
+      ignoreInteractionPlane: false
+      keepHoverOnTrigger: false
+      enableInstantDrag: true
+      isScrollable: false
+      allowMultipleInteractors: true
+      enablePokeDirectionality: false
+      acceptableXDirections: !<float> 0.000000
+      acceptableYDirections: !<float> 0.000000
+      acceptableZDirections: !<float> 1.000000
+      useFilteredPinch: true
+  ScriptTypes:
+    "":
+      {}
+- !<ScriptComponent/d03f6e42-1c77-4039-af88-4e6c13a2d9f5>
+  PrefabRemaps:
+    []
+  Name: InteractableManipulation
+  Enabled: true
+  ScriptAsset: !<reference> 664b556b-1946-4c2c-866a-e675b4e86006
+  ScriptInputsDefault:
+    minimumScaleFactor: true
+    maximumScaleFactor: true
+    enableTranslation: true
+    enableRotation: true
+    showStretchZProperties: true
+    zStretchFactorMin: true
+    zStretchFactorMax: true
+    useFilter: true
+    showFilterProperties: true
+    minCutoff: true
+    beta: true
+    dcutoff: true
+    showTranslationProperties: true
+    _enableXTranslation: true
+    _enableYTranslation: true
+    _enableZTranslation: true
+    isSynced: true
+  ScriptTypesDefault:
+    {}
+  ScriptInputs:
+    "":
+      manipulateRootSceneObject: !<reference.SceneObject> c33a06f6-f359-47cf-a277-c6ad33d703ba
+      minimumScaleFactor: 0.250000
+      maximumScaleFactor: !<float> 20.000000
+      enableTranslation: true
+      enableRotation: true
+      enableScale: false
+      enableStretchZ: false
+      showStretchZProperties: false
+      zStretchFactorMin: !<float> 1.000000
+      zStretchFactorMax: !<float> 12.000000
+      useFilter: true
+      showFilterProperties: false
+      minCutoff: !<float> 2.000000
+      beta: 0.015000
+      dcutoff: !<float> 1.000000
+      showTranslationProperties: false
+      _enableXTranslation: true
+      _enableYTranslation: true
+      _enableZTranslation: true
+      showRotationProperties: true
+      _rotationAxis: !<string> Y
+      isSynced: false
+  ScriptTypes:
+    "":
+      {}
