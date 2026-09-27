@@ -1,0 +1,53 @@
+- !<AssetImportMetadata/5b6ad0c1-eddd-4bb9-83aa-e6e6ad62727f>
+  ImportedAssetIds:
+    TypeScriptAsset: !<reference> 3f71c76f-b80d-4a1f-b03b-df75398eeb67
+  ImporterName: TypeScriptAssetImporter
+  PrimaryAsset: !<reference> 3f71c76f-b80d-4a1f-b03b-df75398eeb67
+  PackageType: NotAPackage
+  LegacyPackagePolicy: ~
+  ExtraData:
+    {}
+  AssetDataMap:
+    TypeScriptAsset: !<own> 39e18dcd-f4ca-4c1b-aef2-a676aa86ee7b
+  DependentFiles:
+    []
+  ImporterSettings: !<AssetImporterSettings>
+    {}
+  CompressionSettings: !<own> 00000000-0000-0000-0000-000000000000
+- !<TypeScriptAssetData/39e18dcd-f4ca-4c1b-aef2-a676aa86ee7b>
+  SvgIcon: ""
+  SetupScript:
+    code: ""
+  Description: ""
+  VersionMajor: 0
+  VersionMinor: 0
+  VersionPatch: 0
+  ComponentUid: 687d6d05-50f8-4d35-b5b6-4e501dc8e0fc
+  ExportUid: 00000000-0000-0000-0000-000000000000
+  PackagePolicy: CanBeUnpacked
+  ScriptInputsHidden:
+    handle: false
+    levelSpeed: false
+    snapToSurface: false
+    surfaceOffsetCm: false
+  ScriptTypesHidden:
+    {}
+  ReadMe: !<reference> 00000000-0000-0000-0000-000000000000
+  DeclarationFile: !<reference> 00000000-0000-0000-0000-000000000000
+  Tags:
+    []
+  Attachments:
+    []
+  DefaultScriptInputs:
+    - levelSpeed: !<float> 10.000000
+      snapToSurface: true
+      surfaceOffsetCm: !<float> 1.000000
+      handle: !<MappingBased.AssignableType> 00000000-0000-0000-0000-000000000000
+  ScriptTypes:
+    -
+      {}
+  InputLines:
+    - // @input float levelSpeed = 10
+    - // @input bool snapToSurface = true
+    - // @input float surfaceOffsetCm = 1
+    - // @input AssignableType handle

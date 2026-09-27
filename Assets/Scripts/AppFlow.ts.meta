@@ -1,0 +1,59 @@
+- !<AssetImportMetadata/1d11710f-67c5-43c1-b1b4-c68f4f2c9f4e>
+  ImportedAssetIds:
+    TypeScriptAsset: !<reference> d1b5ce1e-f6cb-4c20-afe6-dc60f96d83cc
+  ImporterName: TypeScriptAssetImporter
+  PrimaryAsset: !<reference> d1b5ce1e-f6cb-4c20-afe6-dc60f96d83cc
+  PackageType: NotAPackage
+  LegacyPackagePolicy: ~
+  ExtraData:
+    {}
+  AssetDataMap:
+    TypeScriptAsset: !<own> 7d08a923-49d8-4252-a97f-1fd4bde5d22c
+  DependentFiles:
+    []
+  ImporterSettings: !<AssetImporterSettings>
+    {}
+  CompressionSettings: !<own> 00000000-0000-0000-0000-000000000000
+- !<TypeScriptAssetData/7d08a923-49d8-4252-a97f-1fd4bde5d22c>
+  SvgIcon: ""
+  SetupScript:
+    code: ""
+  Description: ""
+  VersionMajor: 0
+  VersionMinor: 0
+  VersionPatch: 0
+  ComponentUid: 3fc46424-1233-4c38-a865-19da9588789b
+  ExportUid: 00000000-0000-0000-0000-000000000000
+  PackagePolicy: CanBeUnpacked
+  ScriptInputsHidden:
+    atelierFace: false
+    demoSeed: false
+    langDropdown: false
+    mascot: false
+    promptBtn: false
+    renderer: false
+  ScriptTypesHidden:
+    {}
+  ReadMe: !<reference> 00000000-0000-0000-0000-000000000000
+  DeclarationFile: !<reference> 00000000-0000-0000-0000-000000000000
+  Tags:
+    []
+  Attachments:
+    []
+  DefaultScriptInputs:
+    - atelierFace: !<MappingBased.AssignableType> 00000000-0000-0000-0000-000000000000
+      langDropdown: !<MappingBased.AssignableType_1> 00000000-0000-0000-0000-000000000000
+      mascot: !<MappingBased.AssignableType_2> 00000000-0000-0000-0000-000000000000
+      renderer: !<MappingBased.AssignableType_3> 00000000-0000-0000-0000-000000000000
+      promptBtn: !<MappingBased.AssignableType_4> 00000000-0000-0000-0000-000000000000
+      demoSeed: true
+  ScriptTypes:
+    -
+      {}
+  InputLines:
+    - // @input AssignableType atelierFace
+    - // @input AssignableType_1 langDropdown
+    - // @input AssignableType_2 mascot
+    - // @input AssignableType_3 renderer
+    - // @input AssignableType_4 promptBtn
+    - // @input bool demoSeed = true

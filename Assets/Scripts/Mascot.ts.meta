@@ -1,0 +1,65 @@
+- !<AssetImportMetadata/f6138632-03f2-443f-bc9d-183bcc1e5841>
+  ImportedAssetIds:
+    TypeScriptAsset: !<reference> 8e6928ef-9ec5-4e7d-89a8-43a99ad61f03
+  ImporterName: TypeScriptAssetImporter
+  PrimaryAsset: !<reference> 8e6928ef-9ec5-4e7d-89a8-43a99ad61f03
+  PackageType: NotAPackage
+  LegacyPackagePolicy: ~
+  ExtraData:
+    {}
+  AssetDataMap:
+    TypeScriptAsset: !<own> b46157cf-b377-464d-8c6c-6d79fe954ba7
+  DependentFiles:
+    []
+  ImporterSettings: !<AssetImporterSettings>
+    {}
+  CompressionSettings: !<own> 00000000-0000-0000-0000-000000000000
+- !<TypeScriptAssetData/b46157cf-b377-464d-8c6c-6d79fe954ba7>
+  SvgIcon: ""
+  SetupScript:
+    code: ""
+  Description: ""
+  VersionMajor: 0
+  VersionMinor: 0
+  VersionPatch: 0
+  ComponentUid: 4d5d491a-b70d-4ac4-85a3-67f895c8f823
+  ExportUid: 00000000-0000-0000-0000-000000000000
+  PackagePolicy: CanBeUnpacked
+  ScriptInputsHidden:
+    bubbleWrapChars: false
+    maxBubbleLines: false
+    plateMaterial: false
+    statusTextSize: false
+    stripHeightCm: false
+    stripWidthCm: false
+    ttsEnabled: false
+    ttsVoice: false
+  ScriptTypesHidden:
+    {}
+  ReadMe: !<reference> 00000000-0000-0000-0000-000000000000
+  DeclarationFile: !<reference> 00000000-0000-0000-0000-000000000000
+  Tags:
+    []
+  Attachments:
+    []
+  DefaultScriptInputs:
+    - plateMaterial: !<reference.Material> 00000000-0000-0000-0000-000000000000
+      stripWidthCm: !<float> 52.000000
+      stripHeightCm: 4.400000
+      statusTextSize: 0.550000
+      bubbleWrapChars: !<float> 80.000000
+      maxBubbleLines: !<float> 1.000000
+      ttsVoice: nova
+      ttsEnabled: false
+  ScriptTypes:
+    -
+      {}
+  InputLines:
+    - // @input Asset.Material plateMaterial
+    - // @input float stripWidthCm = 52
+    - // @input float stripHeightCm = 4.4
+    - // @input float statusTextSize = 0.55
+    - // @input float bubbleWrapChars = 80
+    - // @input float maxBubbleLines = 1
+    - '// @input string ttsVoice = "nova"'
+    - // @input bool ttsEnabled

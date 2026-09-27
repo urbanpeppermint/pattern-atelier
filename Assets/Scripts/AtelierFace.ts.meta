@@ -1,0 +1,71 @@
+- !<AssetImportMetadata/d3294c5b-7162-4d52-bee0-447fe2804efb>
+  ImportedAssetIds:
+    TypeScriptAsset: !<reference> fbb91378-c47c-4365-99a1-94a25bc202f8
+  ImporterName: TypeScriptAssetImporter
+  PrimaryAsset: !<reference> fbb91378-c47c-4365-99a1-94a25bc202f8
+  PackageType: NotAPackage
+  LegacyPackagePolicy: ~
+  ExtraData:
+    {}
+  AssetDataMap:
+    TypeScriptAsset: !<own> b5aa8f2c-896a-4012-95b4-9d0fccc93367
+  DependentFiles:
+    []
+  ImporterSettings: !<AssetImporterSettings>
+    {}
+  CompressionSettings: !<own> 00000000-0000-0000-0000-000000000000
+- !<TypeScriptAssetData/b5aa8f2c-896a-4012-95b4-9d0fccc93367>
+  SvgIcon: ""
+  SetupScript:
+    code: ""
+  Description: ""
+  VersionMajor: 0
+  VersionMinor: 0
+  VersionPatch: 0
+  ComponentUid: e39e5b43-c8c5-40dc-b683-d64971bb5183
+  ExportUid: 00000000-0000-0000-0000-000000000000
+  PackagePolicy: CanBeUnpacked
+  ScriptInputsHidden:
+    boardWidthCm: false
+    screenBody: false
+    screenDesign: false
+    screenFabric: false
+    screenGarment: false
+    screenGenerate: false
+    screenLanding: false
+    screenMeasure: false
+    screenPreview: false
+    stickerMaterial: false
+  ScriptTypesHidden:
+    {}
+  ReadMe: !<reference> 00000000-0000-0000-0000-000000000000
+  DeclarationFile: !<reference> 00000000-0000-0000-0000-000000000000
+  Tags:
+    []
+  Attachments:
+    []
+  DefaultScriptInputs:
+    - stickerMaterial: !<reference.Material> 00000000-0000-0000-0000-000000000000
+      boardWidthCm: !<float> 58.000000
+      screenLanding: !<reference.Texture> 00000000-0000-0000-0000-000000000000
+      screenGarment: !<reference.Texture> 00000000-0000-0000-0000-000000000000
+      screenBody: !<reference.Texture> 00000000-0000-0000-0000-000000000000
+      screenMeasure: !<reference.Texture> 00000000-0000-0000-0000-000000000000
+      screenDesign: !<reference.Texture> 00000000-0000-0000-0000-000000000000
+      screenGenerate: !<reference.Texture> 00000000-0000-0000-0000-000000000000
+      screenPreview: !<reference.Texture> 00000000-0000-0000-0000-000000000000
+      screenFabric: !<reference.Texture> 00000000-0000-0000-0000-000000000000
+  ScriptTypes:
+    -
+      {}
+  InputLines:
+    - // @input Asset.Material stickerMaterial
+    - // @input float boardWidthCm = 58
+    - // @input Asset.Texture screenLanding
+    - // @input Asset.Texture screenGarment
+    - // @input Asset.Texture screenBody
+    - // @input Asset.Texture screenMeasure
+    - // @input Asset.Texture screenDesign
+    - // @input Asset.Texture screenGenerate
+    - // @input Asset.Texture screenPreview
+    - // @input Asset.Texture screenFabric

@@ -1,0 +1,6 @@
+Cache/
+.DS_Store
+*.lock
+.clad/
+.cursor/
+.publish-main/

@@ -1,0 +1,5 @@
+data:
+  externalSources:
+    - 941b9b56-abc2-420a-8e51-2f32efd3c7e9: /Users/elsafz/Library/Preferences/Snap/Lens Studio/LibraryComponents/SpectaclesUIKit@0.0.8/SpectaclesUIKit.lspkg
+    - db0ccc69-005b-4640-8737-3d27b0c8ab56: /Users/elsafz/Library/Preferences/Snap/Lens Studio/LibraryComponents/LSTween@1.0.1/LSTween.lspkg
+    - eb02152e-b64e-4edb-9df9-44dfe49ba482: /Users/elsafz/Library/Preferences/Snap/Lens Studio/LibraryComponents/RemoteServiceGateway@0.1.9/RemoteServiceGateway.lspkg

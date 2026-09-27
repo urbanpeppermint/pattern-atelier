@@ -1,0 +1,50 @@
+- !<AssetImportMetadata/854a4e15-a6ba-4f76-a084-b4030ee153c0>
+  ImportedAssetIds:
+    TypeScriptAsset: !<reference> 7aa45dc6-d77f-44f1-ad2e-3c6cb1d15470
+  ImporterName: TypeScriptAssetImporter
+  PrimaryAsset: !<reference> 7aa45dc6-d77f-44f1-ad2e-3c6cb1d15470
+  PackageType: NotAPackage
+  LegacyPackagePolicy: ~
+  ExtraData:
+    {}
+  AssetDataMap:
+    TypeScriptAsset: !<own> 06d2e945-556d-4869-8996-7e640c66c6a7
+  DependentFiles:
+    []
+  ImporterSettings: !<AssetImporterSettings>
+    {}
+  CompressionSettings: !<own> 00000000-0000-0000-0000-000000000000
+- !<TypeScriptAssetData/06d2e945-556d-4869-8996-7e640c66c6a7>
+  SvgIcon: ""
+  SetupScript:
+    code: ""
+  Description: ""
+  VersionMajor: 0
+  VersionMinor: 0
+  VersionPatch: 0
+  ComponentUid: 586d0a82-a34e-49be-9e87-2f1cbc765518
+  ExportUid: 00000000-0000-0000-0000-000000000000
+  PackagePolicy: CanBeUnpacked
+  ScriptInputsHidden:
+    heightCm: false
+    plateMaterial: false
+    widthCm: false
+  ScriptTypesHidden:
+    {}
+  ReadMe: !<reference> 00000000-0000-0000-0000-000000000000
+  DeclarationFile: !<reference> 00000000-0000-0000-0000-000000000000
+  Tags:
+    []
+  Attachments:
+    []
+  DefaultScriptInputs:
+    - plateMaterial: !<reference.Material> 00000000-0000-0000-0000-000000000000
+      widthCm: 5.500000
+      heightCm: 2.200000
+  ScriptTypes:
+    -
+      {}
+  InputLines:
+    - // @input Asset.Material plateMaterial
+    - // @input float widthCm = 5.5
+    - // @input float heightCm = 2.2

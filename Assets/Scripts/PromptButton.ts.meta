@@ -1,0 +1,71 @@
+- !<AssetImportMetadata/5387a52e-2423-4430-9dea-2ec043464190>
+  ImportedAssetIds:
+    TypeScriptAsset: !<reference> 89612080-595b-447a-9d6f-2350b0fb22b5
+  ImporterName: TypeScriptAssetImporter
+  PrimaryAsset: !<reference> 89612080-595b-447a-9d6f-2350b0fb22b5
+  PackageType: NotAPackage
+  LegacyPackagePolicy: ~
+  ExtraData:
+    {}
+  AssetDataMap:
+    TypeScriptAsset: !<own> 01af0f82-15c0-4459-b497-26feb8eba5e4
+  DependentFiles:
+    []
+  ImporterSettings: !<AssetImporterSettings>
+    {}
+  CompressionSettings: !<own> 00000000-0000-0000-0000-000000000000
+- !<TypeScriptAssetData/01af0f82-15c0-4459-b497-26feb8eba5e4>
+  SvgIcon: ""
+  SetupScript:
+    code: ""
+  Description: ""
+  VersionMajor: 0
+  VersionMinor: 0
+  VersionPatch: 0
+  ComponentUid: ce39a189-7390-44ce-b44e-c88d5785aed9
+  ExportUid: 00000000-0000-0000-0000-000000000000
+  PackagePolicy: CanBeUnpacked
+  ScriptInputsHidden:
+    barTexture: false
+    barWidth: false
+    boardTexture: false
+    boardWidth: false
+    boardY: false
+    buttonMaterial: false
+    height: false
+    listeningMaterial: false
+    stickerMaterial: false
+    width: false
+  ScriptTypesHidden:
+    {}
+  ReadMe: !<reference> 00000000-0000-0000-0000-000000000000
+  DeclarationFile: !<reference> 00000000-0000-0000-0000-000000000000
+  Tags:
+    []
+  Attachments:
+    []
+  DefaultScriptInputs:
+    - buttonMaterial: !<reference.Material> 00000000-0000-0000-0000-000000000000
+      listeningMaterial: !<reference.Material> 00000000-0000-0000-0000-000000000000
+      width: !<float> 26.000000
+      height: !<float> 6.000000
+      stickerMaterial: !<reference.Material> 00000000-0000-0000-0000-000000000000
+      barTexture: !<reference.Texture> 00000000-0000-0000-0000-000000000000
+      boardTexture: !<reference.Texture> 00000000-0000-0000-0000-000000000000
+      barWidth: !<float> 42.000000
+      boardWidth: !<float> 48.000000
+      boardY: !<float> 33.000000
+  ScriptTypes:
+    -
+      {}
+  InputLines:
+    - // @input Asset.Material buttonMaterial
+    - // @input Asset.Material listeningMaterial
+    - // @input float width = 26
+    - // @input float height = 6
+    - // @input Asset.Material stickerMaterial
+    - // @input Asset.Texture barTexture
+    - // @input Asset.Texture boardTexture
+    - // @input float barWidth = 42
+    - // @input float boardWidth = 48
+    - // @input float boardY = 33
