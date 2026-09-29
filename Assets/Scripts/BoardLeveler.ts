@@ -22,13 +22,37 @@ export class BoardLeveler extends BaseScriptComponent {
   private held: boolean = false;
   private targetY: number | null = null;
   private snapArmed: boolean = false;
+  private posed: boolean = false;
+  private locked: boolean = false;
 
   /** Surface follow waits until the place-on-surface tap. */
   public setSnapArmed(on: boolean) {
+    if (this.locked) {
+      return;
+    }
     this.snapArmed = on;
     if (!on) {
       this.targetY = null;
     }
+  }
+
+  /** After placement, keep the sheet on the surface. Rotation stays as the user left it. */
+  public releaseToUser() {
+    if (this.locked) {
+      return;
+    }
+    this.posed = true;
+    this.snapArmed = true;
+  }
+
+  /** Freeze position and rotation. Stops the leveler from turning the board. */
+  public lock() {
+    this.locked = true;
+    this.posed = true;
+    this.snapArmed = false;
+    this.held = false;
+    this.targetY = null;
+    print("BoardLeveler: pattern pinned");
   }
 
   onAwake() {
@@ -62,17 +86,24 @@ export class BoardLeveler extends BaseScriptComponent {
   }
 
   private tick() {
+    if (this.locked) {
+      return;
+    }
     const tr = this.getSceneObject().getTransform();
 
-    const rot = tr.getWorldRotation();
-    const right = rot.multiplyVec3(new vec3(1, 0, 0));
-    const yaw = Math.atan2(-right.z, right.x);
-    const flat = quat.angleAxis(-Math.PI / 2, new vec3(1, 0, 0));
-    const target = quat.angleAxis(yaw, vec3.up()).multiply(flat);
-    const s = Math.min(1, getDeltaTime() * this.levelSpeed);
-    tr.setWorldRotation(quat.slerp(rot, target, s));
+    // Before placement, keep the board flat. After placement, do not
+    // rewrite rotation — that was turning the pattern on its own.
+    if (!this.posed && !this.snapArmed) {
+      const rot = tr.getWorldRotation();
+      const right = rot.multiplyVec3(new vec3(1, 0, 0));
+      const yaw = Math.atan2(-right.z, right.x);
+      const flat = quat.angleAxis(-Math.PI / 2, new vec3(1, 0, 0));
+      const target = quat.angleAxis(yaw, vec3.up()).multiply(flat);
+      const s = Math.min(1, getDeltaTime() * this.levelSpeed);
+      tr.setWorldRotation(quat.slerp(rot, target, s));
+    }
 
-    if (!this.snapArmed || this.hitSession === null || this.held) {
+    if (!this.snapArmed || this.hitSession === null) {
       return;
     }
     const pos = tr.getWorldPosition();
@@ -83,7 +114,7 @@ export class BoardLeveler extends BaseScriptComponent {
       try {
         this.hitSession.hitTest(from, to, (result: WorldQueryHitTestResult) => {
           this.rayBusy = false;
-          if (result !== null && result !== undefined && !this.held) {
+          if (result !== null && result !== undefined) {
             this.targetY = result.position.y + this.surfaceOffsetCm;
           }
         });

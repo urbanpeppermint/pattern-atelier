@@ -1653,9 +1653,9 @@
     {}
   ScriptInputs:
     "":
-      openAIToken: "[INSERT OPENAI TOKEN HERE]" OPENAI TOKEN HERE]"
-      googleToken: "[INSERT GOOGLE TOKEN HERE]" GOOGLE TOKEN HERE]"
-      snapToken: "[INSERT SNAP TOKEN HERE]" SNAP TOKEN HERE]"
+      openAIToken: "[INSERT OPENAI TOKEN HERE]"
+      googleToken: "[INSERT GOOGLE TOKEN HERE]"
+      snapToken: "[INSERT SNAP TOKEN HERE]"
   ScriptTypes:
     "":
       {}
@@ -2614,7 +2614,7 @@
   PrefabRemaps:
     []
   Name: UiHandle
-  Enabled: true
+  Enabled: false
   Layers: 1
   LocalTransform: !<TransformEntity>
     Position: {x: 34.000000, y: -16.000000, z: 4.000000}
@@ -2928,7 +2928,7 @@
   Enabled: true
   Layers: 1
   LocalTransform: !<TransformEntity>
-    Position: {x: 22.000000, y: -14.000000, z: 0.000000}
+    Position: {x: 14.000000, y: -14.000000, z: 0.500000}
     Rotation: {x: 0.000000, y: 0.000000, z: 0.000000}
     Scale: {x: 1.000000, y: 1.000000, z: 1.000000}
     HasSegmentScaleCompensation: false

@@ -248,7 +248,6 @@ export const HOTSPOTS: { [id: string]: Hotspot[] } = {
   generate: [],
   preview: [
     { id: "approve", nx: 0.839, ny: 0.213, nw: 0.19, nh: 0.06 },
-    { id: "regenerate", nx: 0.80, ny: 0.20, nw: 0.18, nh: 0.06 },
     { id: "back", nx: 0.10, ny: 0.22, nw: 0.14, nh: 0.08 }
   ],
   fabric: [

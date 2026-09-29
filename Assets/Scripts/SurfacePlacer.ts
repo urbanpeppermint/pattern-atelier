@@ -3,7 +3,7 @@
 
 import { InteractionManager } from "SpectaclesInteractionKit.lspkg/Core/InteractionManager/InteractionManager";
 import { Interactor, InteractorInputType } from "SpectaclesInteractionKit.lspkg/Core/Interactor/Interactor";
-import { makeLabel } from "./UiLite";
+import { makeLabel, makeTappable } from "./UiLite";
 import { BoardLeveler } from "./BoardLeveler";
 
 @component
@@ -20,6 +20,8 @@ export class SurfacePlacer extends BaseScriptComponent {
   private bob: number = 0;
   private camera: Transform | null = null;
   private listening: boolean = false;
+  private pinObj: SceneObject | null = null;
+  private pinned: boolean = false;
 
   onAwake() {
     this.createEvent("OnStartEvent").bind(() => this.ensureSession());
@@ -203,9 +205,47 @@ export class SurfacePlacer extends BaseScriptComponent {
     }
     const leveler = this.board.getComponent(BoardLeveler.getTypeName()) as BoardLeveler;
     if (leveler !== null && !isNull(leveler)) {
-      leveler.setSnapArmed(true);
+      leveler.releaseToUser();
     }
-    print("SurfacePlacer: pattern placed on surface");
+    this.showPin();
+    print("SurfacePlacer: pinch MOVE to slide on the surface, then PIN");
+  }
+
+  private showPin() {
+    if (this.board === null || this.pinObj !== null) {
+      return;
+    }
+    const pin = global.scene.createSceneObject("Pin");
+    pin.setParent(this.board);
+    pin.getTransform().setLocalPosition(new vec3(26, -14, 0.5));
+    pin.getTransform().setLocalRotation(quat.quatIdentity());
+    pin.getTransform().setLocalScale(new vec3(1, 1, 1));
+    const label = makeLabel(pin, "PIN", 0.7, new vec3(0, 0, 0), new vec4(1, 1, 1, 1));
+    label.renderOrder = 150;
+    makeTappable(pin, 8, 3, () => this.pin());
+    this.pinObj = pin;
+  }
+
+  private pin() {
+    if (this.pinned || this.board === null || isNull(this.board)) {
+      return;
+    }
+    this.pinned = true;
+    const leveler = this.board.getComponent(BoardLeveler.getTypeName()) as BoardLeveler;
+    if (leveler !== null && !isNull(leveler)) {
+      leveler.lock();
+    }
+    const count = this.board.getChildrenCount();
+    for (let i = 0; i < count; i++) {
+      const child = this.board.getChild(i);
+      if (child.name === "Handle") {
+        child.enabled = false;
+      }
+    }
+    if (this.pinObj !== null && !isNull(this.pinObj)) {
+      this.pinObj.enabled = false;
+    }
+    print("SurfacePlacer: pattern pinned");
   }
 
   private cameraTransform(): Transform | null {

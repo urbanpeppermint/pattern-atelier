@@ -73,6 +73,7 @@ export class AppFlow extends BaseScriptComponent {
   private sizeIdx: number = 3;
   private garmentPick: number = 1;
   private lastCutIndex: number = 0;
+  private previewOnce: boolean = false;
   private stylePrompt: string = "";
   private projectCards: StoredCard[] = [];
   private state: string = "LANDING";
@@ -342,6 +343,7 @@ export class AppFlow extends BaseScriptComponent {
   }
 
   private enterDesign() {
+    this.previewOnce = false;
     this.state = "DESIGN";
     this.promptOpen = false;
     this.hidePrompt();
@@ -358,6 +360,9 @@ export class AppFlow extends BaseScriptComponent {
   }
 
   private enterPreview(index: number) {
+    if (this.state === "PREVIEW" && this.lastCutIndex === index) {
+      return;
+    }
     this.lastCutIndex = index;
     this.state = "PREVIEW";
     this.hidePrompt();
@@ -368,12 +373,20 @@ export class AppFlow extends BaseScriptComponent {
   }
 
   private skipToSeededPreview() {
+    if (this.state !== "DESIGN" || this.previewOnce) {
+      return;
+    }
+    this.previewOnce = true;
     if (this.projectCards.length < 2) {
       this.seedCards();
     }
     this.enterGenerate();
     const delay = this.createEvent("DelayedCallbackEvent") as DelayedCallbackEvent;
-    delay.bind(() => this.enterPreview(0));
+    delay.bind(() => {
+      if (this.state === "GENERATE") {
+        this.enterPreview(0);
+      }
+    });
     delay.reset(0.6);
   }
 

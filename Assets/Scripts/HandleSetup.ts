@@ -1,45 +1,30 @@
-// Manija de agarre del tablero de moldes: genera su visual (quad doble cara)
-// y un collider a medida para que SIK pueda apuntarle y manipular el tablero.
-//
-// 5.15 SIK 0.15.0: Interactable.getTypeName(), onHoverEnter, onTriggerStart,
-// onTriggerEnd, and colliders match. Drag itself is InteractableManipulation
-// on this object (attached when the scene is wired, not created here).
+// Invisible grab on the pattern itself. No floating label.
+// Drag and rotate come from InteractableManipulation on this object.
 
 import { Interactable } from "SpectaclesInteractionKit.lspkg/Components/Interaction/Interactable/Interactable";
 
 @component
 export class HandleSetup extends BaseScriptComponent {
   @input material: Material;
-  @input width: number = 14; // cm
-  @input height: number = 5; // cm
+  @input width: number = 10; // cm
+  @input height: number = 4; // cm
 
   onAwake() {
-    const ink = new vec4(1, 1, 1, 1);
-    const iconObj = global.scene.createSceneObject("slideIcon");
-    iconObj.setParent(this.sceneObject);
-    iconObj.getTransform().setLocalPosition(new vec3(0, 1.2, 8));
-    iconObj.getTransform().setLocalScale(new vec3(2.4, 2.4, 2.4));
-    const icon = iconObj.createComponent("Component.Text") as Text;
-    icon.text = "+";
-    icon.size = 72;
-    icon.renderOrder = 130;
-    icon.textFill.color = ink;
-
-    const wordObj = global.scene.createSceneObject("slideWord");
+    const wordObj = global.scene.createSceneObject("moveWord");
     wordObj.setParent(this.sceneObject);
-    wordObj.getTransform().setLocalPosition(new vec3(0, -2.2, 8));
+    wordObj.getTransform().setLocalPosition(new vec3(0, 0, 0.4));
     const word = wordObj.createComponent("Component.Text") as Text;
-    word.text = "MOVE / TURN";
+    word.text = "MOVE";
     word.size = 48;
-    word.renderOrder = 130;
-    word.textFill.color = ink;
+    word.renderOrder = 150;
+    word.textFill.color = new vec4(1, 1, 1, 1);
 
     try {
       const collider = this.sceneObject.createComponent("Physics.ColliderComponent") as ColliderComponent;
       const shape = Shape.createBoxShape();
-      shape.size = new vec3(14, 10, 8);
+      shape.size = new vec3(this.width, this.height, 4);
       collider.shape = shape;
-      print("HandleSetup: collider listo " + this.width + "x" + this.height);
+      print("HandleSetup: grab " + this.width + "x" + this.height);
     } catch (e) {
       print("HandleSetup: fallo el collider: " + e);
     }
