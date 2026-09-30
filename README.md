@@ -63,7 +63,7 @@ Fewer purchased envelopes that were never quite right, and fewer samples cut for
 - **ASR** for voice input (keyboard fallback in the editor)
 - Parametric blocks in-repo: bodice, skirt, circle skirt, sleeve, shirt, plus extra blocks in `MoreBlocks.ts`
 - World Query to sit the board on a real surface; grab + pin after placement
-- Editorial mockup boards + UI art by [Florencia Raffa](https://github.com/floraraffa)
+- Editorial mockup boards + UI art by [Florencia Raffa](https://github.com/floraraffa) ([@floraraffa](https://github.com/floraraffa))
 
 Packages and pins: [`PACKAGES.md`](PACKAGES.md). Rebuild notes: [`docs/5.15-demo/README.md`](docs/5.15-demo/README.md).
 
@@ -83,6 +83,11 @@ The CLAD Summer Hackathon build (Lens Studio **5.23**, 11 languages, live Patter
 
 - Repo: [floraraffa/pattern-atelier](https://github.com/floraraffa/pattern-atelier)
 - Open that project only in **Lens Studio 5.23+**
+
+## Contributors
+
+- [@urbanpeppermint](https://github.com/urbanpeppermint) — Spectacles 2024 / Lens Studio 5.15 demo
+- [Florencia Raffa](https://github.com/floraraffa) ([@floraraffa](https://github.com/floraraffa)) — editorial UI, 5.23 CLAD line, co-creator
 
 ## License / credentials
 
