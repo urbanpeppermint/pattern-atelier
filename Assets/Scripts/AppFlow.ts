@@ -63,6 +63,10 @@ export class AppFlow extends BaseScriptComponent {
   @input
   @allowUndefined
   promptBtn: PromptButton;
+  /** Unlit glass/cream mat for the true-size calibrator (e.g. UiGlassMat). */
+  @input
+  @allowUndefined
+  calibratorMaterial: Material;
   @input demoSeed: boolean = true;
 
   private garment: string = "";
@@ -411,6 +415,9 @@ export class AppFlow extends BaseScriptComponent {
     if (placer === null || isNull(placer)) {
       placer = host.createComponent(SurfacePlacer.getTypeName()) as SurfacePlacer;
     }
+    if (this.calibratorMaterial !== undefined && !isNull(this.calibratorMaterial)) {
+      placer.plateMaterial = this.calibratorMaterial;
+    }
     placer.begin(host);
   }
 
@@ -440,7 +447,7 @@ export class AppFlow extends BaseScriptComponent {
     this.showAtelier("fabric", HOTSPOTS.fabric);
     this.mascot.setMood("wink");
     this.mascot.setThinking(false);
-    this.mascot.speak("Pinch the surface where you want the pattern.");
+    this.mascot.speak("Pinch a surface, match the 10 cm square to a ruler, CONFIRM, then PIN.");
     this.persist();
   }
 

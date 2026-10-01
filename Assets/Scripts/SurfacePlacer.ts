@@ -5,9 +5,14 @@ import { InteractionManager } from "SpectaclesInteractionKit.lspkg/Core/Interact
 import { Interactor, InteractorInputType } from "SpectaclesInteractionKit.lspkg/Core/Interactor/Interactor";
 import { makeLabel, makeTappable } from "./UiLite";
 import { BoardLeveler } from "./BoardLeveler";
+import { ScaleCalibrator } from "./ScaleCalibrator";
 
 @component
 export class SurfacePlacer extends BaseScriptComponent {
+  @input
+  @allowUndefined
+  plateMaterial: Material;
+
   private marker: SceneObject | null = null;
   private chevrons: Text[] = [];
   private board: SceneObject | null = null;
@@ -207,8 +212,31 @@ export class SurfacePlacer extends BaseScriptComponent {
     if (leveler !== null && !isNull(leveler)) {
       leveler.releaseToUser();
     }
-    this.showPin();
-    print("SurfacePlacer: pinch MOVE to slide on the surface, then PIN");
+    this.beginTrueSize();
+    print("SurfacePlacer: match the 10 cm square to a ruler, CONFIRM, then PIN");
+  }
+
+  private beginTrueSize() {
+    if (this.board === null || isNull(this.board)) {
+      return;
+    }
+    if (this.plateMaterial === undefined || isNull(this.plateMaterial)) {
+      print("SurfacePlacer: set plateMaterial for true-size calibrator");
+      this.showPin();
+      return;
+    }
+    let cal = this.board.getComponent(ScaleCalibrator.getTypeName()) as ScaleCalibrator;
+    if (cal === null || isNull(cal)) {
+      cal = this.board.createComponent(ScaleCalibrator.getTypeName()) as ScaleCalibrator;
+    }
+    cal.plateMaterial = this.plateMaterial;
+    cal.scaleTarget = this.board;
+    cal.referenceCm = 10;
+    cal.onConfirmed = () => {
+      this.showPin();
+      print("SurfacePlacer: true size locked — PIN when ready");
+    };
+    cal.begin();
   }
 
   private showPin() {

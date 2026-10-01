@@ -44,6 +44,7 @@ export class PatternRenderer extends BaseScriptComponent {
   @input demoSeed: boolean = false;
   @input drawTestSkirt: boolean = false;
   @input showLegend: boolean = true;
+  @input showDimensions: boolean = true;
 
   private pieceObjects: SceneObject[] = [];
 
@@ -137,17 +138,32 @@ export class PatternRenderer extends BaseScriptComponent {
     }
 
     let minX = Number.MAX_VALUE, maxX = -Number.MAX_VALUE;
+    let minY = Number.MAX_VALUE, maxY = -Number.MAX_VALUE;
     for (let i = 0; i < piece.outline.length; i++) {
       const pt = piece.outline[i];
       if (pt.x < minX) { minX = pt.x; }
       if (pt.x > maxX) { maxX = pt.x; }
+      if (pt.y < minY) { minY = pt.y; }
+      if (pt.y > maxY) { maxY = pt.y; }
     }
     const cx = (minX + maxX) / 2;
     makeLabel(obj, piece.name, 2.2, new vec3(cx, -3.2, 0.1));
+    if (this.showDimensions) {
+      const wCm = maxX - minX;
+      const hCm = maxY - minY;
+      makeLabel(
+        obj,
+        wCm.toFixed(1) + " × " + hCm.toFixed(1) + " cm",
+        1.4,
+        new vec3(cx, -5.0, 0.1),
+        new vec4(0.35, 0.35, 0.35, 1)
+      );
+    }
+    const foldY = this.showDimensions ? -7.2 : -6.2;
     if (piece.cutOnFold === true) {
-      makeLabel(obj, t("onFold"), 1.6, new vec3(cx, -6.2, 0.1));
+      makeLabel(obj, t("onFold"), 1.6, new vec3(cx, foldY, 0.1));
     } else if (piece.doubleFabric === true) {
-      makeLabel(obj, t("doubleFabric"), 1.6, new vec3(cx, -6.2, 0.1));
+      makeLabel(obj, t("doubleFabric"), 1.6, new vec3(cx, foldY, 0.1));
     }
     return obj;
   }

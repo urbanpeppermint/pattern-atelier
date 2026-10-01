@@ -42,7 +42,7 @@ This repository no longer has a `main` 5.23 branch. The higher Studio line lives
 3. **Body / Measure** — woman or man profile, then size / measurements.
 4. **Design** — pick silhouette, length, fabric, details; keep a typed or spoken style note. Confirm to continue.
 5. **Preview** — approve the look before cutting.
-6. **Fabric** — pinch a detected surface; the board sits flat. **Yellow = cut**, **white = seam**. Pinch **MOVE** to slide the sheet on that surface, then **PIN** when position and rotation are right.
+6. **Fabric** — pinch a detected surface; the board sits flat. Match the on-board **10 cm** square to a physical ruler, tap **CONFIRM** (locks true-size scale), then **PIN**. Piece labels show **width × height in cm**. **Yellow = cut**, **white = seam**.
 
 An **A · ASSISTANT** strip speaks short guidance (TTS when Remote Service Gateway is configured). No cartoon mascot.
 
@@ -62,7 +62,8 @@ Fewer purchased envelopes that were never quite right, and fewer samples cut for
 - **Remote Service Gateway 1.0.1** — OpenAI speech for the assistant; paste your own tokens (placeholders in git)
 - **ASR** for voice input (keyboard fallback in the editor)
 - Parametric blocks in-repo: bodice, skirt, circle skirt, sleeve, shirt, plus extra blocks in `MoreBlocks.ts`
-- World Query to sit the board on a real surface; grab + pin after placement
+- World Query to sit the board on a real surface; **10 cm ruler calibration** + grab + pin after placement
+- Piece dimension labels (cm) on each pattern piece for a quick tape-measure check
 - Editorial mockup boards + UI art by [Florencia Raffa](https://github.com/floraraffa) ([@floraraffa](https://github.com/floraraffa))
 
 Packages and pins: [`PACKAGES.md`](PACKAGES.md). Rebuild notes: [`docs/5.15-demo/README.md`](docs/5.15-demo/README.md).

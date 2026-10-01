@@ -1,0 +1,54 @@
+- !<AssetImportMetadata/5417db6a-c016-4666-b452-a13902d47b5e>
+  ImportedAssetIds:
+    TypeScriptAsset: !<reference> 1159e278-f83e-4cdb-8f43-e3895d1f558b
+  ImporterName: TypeScriptAssetImporter
+  PrimaryAsset: !<reference> 1159e278-f83e-4cdb-8f43-e3895d1f558b
+  PackageType: NotAPackage
+  LegacyPackagePolicy: ~
+  ExtraData:
+    {}
+  AssetDataMap:
+    TypeScriptAsset: !<own> 91475427-025f-461a-b65f-b911d9df0a48
+  DependentFiles:
+    []
+  ImporterSettings: !<AssetImporterSettings>
+    {}
+  CompressionSettings: !<own> 00000000-0000-0000-0000-000000000000
+- !<TypeScriptAssetData/91475427-025f-461a-b65f-b911d9df0a48>
+  SvgIcon: ""
+  SetupScript:
+    code: ""
+  Description: ""
+  VersionMajor: 0
+  VersionMinor: 0
+  VersionPatch: 0
+  ComponentUid: 2aaa497e-cdd1-4f1a-877c-5ef4c1961b23
+  ExportUid: 00000000-0000-0000-0000-000000000000
+  PackagePolicy: CanBeUnpacked
+  ScriptInputsHidden:
+    {}
+  ScriptTypesHidden:
+    {}
+  ReadMe: !<reference> 00000000-0000-0000-0000-000000000000
+  DeclarationFile: !<reference> 00000000-0000-0000-0000-000000000000
+  Tags:
+    []
+  Attachments:
+    []
+  DefaultScriptInputs:
+    - plateMaterial: !<reference.Material> 00000000-0000-0000-0000-000000000000
+      referenceCm: !<float> 10.000000
+      scaleTarget: !<reference.SceneObject> 00000000-0000-0000-0000-000000000000
+      stepPercent: !<float> 1.500000
+      minScale: !<float> 0.850000
+      maxScale: !<float> 1.200000
+  ScriptTypes:
+    -
+      {}
+  InputLines:
+    - // @input Asset.Material plateMaterial
+    - // @input float referenceCm = 10
+    - // @input SceneObject scaleTarget
+    - // @input float stepPercent = 1.5
+    - // @input float minScale = 0.85
+    - // @input float maxScale = 1.2
