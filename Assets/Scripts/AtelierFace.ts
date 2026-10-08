@@ -1,7 +1,14 @@
-// Full-bleed atelier UI face: each step is a mockup texture board with
-// transparent tap hotspots. Language is NOT a screen — use LangDropdown.
+// Full-bleed atelier UI face: clean background plates + native labels/CTAs
+// over blank zones. Hotspots stay invisible; text is never baked into textures
+// (Snap rejection: sexual content in raster mockups).
 
-import { makeLabel, makeSticker, makeTappable, resetLocal, safeDestroy } from "./UiLite";
+import { makeLabel, makePlate, makeSticker, makeTappable, resetLocal, safeDestroy } from "./UiLite";
+
+const INK = new vec4(0.08, 0.07, 0.05, 1);
+const MUTED = new vec4(0.49, 0.46, 0.42, 1);
+const PAPER = new vec4(0.93, 0.90, 0.85, 0.94);
+const DARK = new vec4(0.08, 0.07, 0.05, 0.94);
+const WHITE = new vec4(0.96, 0.94, 0.90, 1);
 
 export type AtelierScreenId =
   | "landing"
@@ -173,16 +180,106 @@ export class AtelierFace extends BaseScriptComponent {
       });
     }
 
-    if (id === "design" && this.hits !== null) {
-      const confirm = makeLabel(this.hits, "CONFIRM", 1.35, new vec3((0.75 - 0.5) * w, (0.11 - 0.5) * h, 1.0), new vec4(0.1, 0.1, 0.1, 1));
-      confirm.renderOrder = 120;
-      makeTappable(confirm.getSceneObject(), 18, 3.6, () => {
-        print("AtelierFace: tap confirm");
+    this.addNativeChrome(id, w, h);
+  }
+
+  /** Titles + CTA chips drawn in Lens (not in the plate texture). */
+  private addNativeChrome(id: AtelierScreenId, w: number, h: number) {
+    if (this.hits === null) {
+      return;
+    }
+    const host = this.hits;
+    const mat = this.stickerMaterial;
+
+    const title = (text: string, nx: number, ny: number, size: number) => {
+      const t = makeLabel(host, text, size, new vec3((nx - 0.5) * w, (ny - 0.5) * h, 0.9), INK);
+      t.renderOrder = 130;
+      return t;
+    };
+    const sub = (text: string, nx: number, ny: number) => {
+      const t = makeLabel(host, text, 0.7, new vec3((nx - 0.5) * w, (ny - 0.5) * h, 0.9), MUTED);
+      t.renderOrder = 130;
+      return t;
+    };
+    const chip = (label: string, nx: number, ny: number, ww: number, hh: number, hid: string, solid: boolean) => {
+      const color = solid ? DARK : PAPER;
+      const ink = solid ? WHITE : INK;
+      const plate = makePlate(host, "chip_" + hid, ww, hh, this.tint(mat, color));
+      plate.getTransform().setLocalPosition(new vec3((nx - 0.5) * w, (ny - 0.5) * h, 0.85));
+      const rmv = plate.getComponent("Component.RenderMeshVisual") as RenderMeshVisual;
+      if (rmv !== null && !isNull(rmv)) {
+        rmv.renderOrder = 125;
+      }
+      const t = makeLabel(plate, label, Math.min(hh * 0.38, 1.1), new vec3(0, 0, 0.25), ink);
+      t.renderOrder = 140;
+      makeTappable(plate, ww + 1, hh + 1, () => {
+        print("AtelierFace: tap " + hid);
         if (this.onHotspot !== null) {
-          this.onHotspot("confirm");
+          this.onHotspot(hid);
         }
       });
+    };
+
+    if (id === "landing") {
+      title("PATTERN ATELIER", 0.24, 0.72, 1.8);
+      sub("GENERATIVE FASHION SYSTEM", 0.24, 0.64);
+      sub("AI PATTERN  ·  PERSONALIZED FIT  ·  SPATIAL PROJECTION", 0.24, 0.52);
+      chip("ENTER ATELIER →", 0.24, 0.32, 18, 3.4, "enter", true);
+    } else if (id === "garment") {
+      title("SELECT GARMENT TYPE", 0.28, 0.86, 1.4);
+      const names = ["TOP", "DRESS", "TROUSERS", "SKIRT", "JACKET"];
+      const xs = [0.15, 0.25, 0.35, 0.45, 0.55];
+      for (let i = 0; i < names.length; i++) {
+        chip(names[i], xs[i], 0.18, 8, 2.4, "card" + i, false);
+      }
+      chip("←", 0.04, 0.46, 4, 3, "back", false);
+    } else if (id === "body") {
+      title("BODY PROFILE", 0.28, 0.86, 1.4);
+      chip("WOMAN", 0.22, 0.48, 10, 4, "woman", false);
+      chip("MAN", 0.40, 0.48, 10, 4, "man", false);
+      chip("NEXT →", 0.70, 0.22, 12, 3.2, "confirm", true);
+      chip("← BACK", 0.10, 0.22, 8, 2.8, "back", false);
+    } else if (id === "measure") {
+      title("MEASUREMENTS", 0.28, 0.88, 1.3);
+      chip("01 SCAN BODY", 0.14, 0.62, 14, 3, "scan", false);
+      chip("02 MANUAL INPUT", 0.14, 0.50, 14, 3, "manual", false);
+      chip("03 STANDARD SIZE", 0.14, 0.38, 14, 3, "standard", false);
+      chip("CONFIRM →", 0.82, 0.28, 12, 3.2, "confirm", true);
+      chip("← BACK", 0.14, 0.22, 8, 2.6, "back", false);
+    } else if (id === "design") {
+      title("DESIGN YOUR PIECE", 0.28, 0.88, 1.35);
+      sub("DESCRIBE THE GARMENT YOU WANT TO CREATE", 0.28, 0.80);
+      chip("FITTED", 0.652, 0.72, 6, 2.2, "sil_fitted", false);
+      chip("REGULAR", 0.746, 0.72, 6.5, 2.2, "sil_regular", false);
+      chip("OVERSIZED", 0.83, 0.72, 7, 2.2, "sil_oversized", false);
+      chip("MINI", 0.66, 0.62, 5.5, 2.2, "len_mini", false);
+      chip("MIDI", 0.746, 0.62, 5.5, 2.2, "len_midi", false);
+      chip("MAXI", 0.83, 0.62, 5.5, 2.2, "len_maxi", false);
+      chip("DRAPED", 0.62, 0.45, 6, 2.1, "det_draped", false);
+      chip("ASYMMETRIC", 0.72, 0.45, 7.5, 2.1, "det_asymmetric", false);
+      chip("OPEN BACK", 0.84, 0.45, 7, 2.1, "det_open", false);
+      chip("CONFIRM →", 0.78, 0.14, 12, 3.2, "confirm", true);
+      chip("← BACK", 0.12, 0.18, 8, 2.6, "back", false);
+    } else if (id === "generate") {
+      title("GENERATING PATTERN", 0.40, 0.88, 1.3);
+      sub("ANALYZING  ·  DRAFTING  ·  OPTIMIZING FIT", 0.40, 0.78);
+    } else if (id === "preview") {
+      title("PATTERN PREVIEW", 0.30, 0.88, 1.4);
+      sub("YOUR DESIGN IS READY", 0.30, 0.80);
+      chip("APPROVE PATTERN →", 0.78, 0.22, 16, 3.4, "approve", true);
+      chip("← BACK", 0.12, 0.22, 8, 2.6, "back", false);
+    } else if (id === "fabric") {
+      title("TO FABRIC", 0.28, 0.88, 1.35);
+      sub("YOUR PATTERN IN REAL SPACE", 0.28, 0.80);
+      chip("NEXT PIECE →", 0.84, 0.22, 12, 3.0, "nextPiece", true);
+      chip("← BACK", 0.12, 0.22, 8, 2.6, "back", false);
     }
+  }
+
+  private tint(base: Material, color: vec4): Material {
+    const m = base.clone();
+    m.mainPass.baseColor = color;
+    return m;
   }
 
   hide() {
@@ -203,55 +300,21 @@ export class AtelierFace extends BaseScriptComponent {
   }
 }
 
-/** Hotspot maps aligned to the editorial mockups (normalized 0–1). */
+/** Hotspots for demo flow. Native chips also fire the same ids. */
 export const HOTSPOTS: { [id: string]: Hotspot[] } = {
-  landing: [{ id: "enter", nx: 0.22, ny: 0.30, nw: 0.28, nh: 0.10 }],
+  // Empty: landing ENTER is a native chip only (avoids double-fire).
+  landing: [],
   garment: [
-    { id: "back", nx: 0.04, ny: 0.46, nw: 0.08, nh: 0.16 },
-    { id: "next", nx: 0.62, ny: 0.46, nw: 0.06, nh: 0.12 },
-    { id: "card0", nx: 0.15, ny: 0.46, nw: 0.10, nh: 0.50 },
-    { id: "card1", nx: 0.25, ny: 0.46, nw: 0.10, nh: 0.50 },
-    { id: "card2", nx: 0.35, ny: 0.46, nw: 0.10, nh: 0.50 },
-    { id: "card3", nx: 0.45, ny: 0.46, nw: 0.10, nh: 0.50 },
-    { id: "card4", nx: 0.55, ny: 0.46, nw: 0.10, nh: 0.50 }
+    { id: "card0", nx: 0.15, ny: 0.55, nw: 0.12, nh: 0.45 },
+    { id: "card1", nx: 0.30, ny: 0.55, nw: 0.12, nh: 0.45 },
+    { id: "card2", nx: 0.45, ny: 0.55, nw: 0.12, nh: 0.45 },
+    { id: "card3", nx: 0.60, ny: 0.55, nw: 0.12, nh: 0.45 },
+    { id: "card4", nx: 0.75, ny: 0.55, nw: 0.12, nh: 0.45 }
   ],
-  body: [
-    { id: "back", nx: 0.04, ny: 0.48, nw: 0.08, nh: 0.16 },
-    { id: "woman", nx: 0.22, ny: 0.48, nw: 0.16, nh: 0.46 },
-    { id: "man", nx: 0.40, ny: 0.48, nw: 0.16, nh: 0.46 },
-    { id: "confirm", nx: 0.52, ny: 0.20, nw: 0.28, nh: 0.14 }
-  ],
-  measure: [
-    { id: "scan", nx: 0.12, ny: 0.58, nw: 0.16, nh: 0.10 },
-    { id: "manual", nx: 0.12, ny: 0.46, nw: 0.16, nh: 0.10 },
-    { id: "standard", nx: 0.12, ny: 0.34, nw: 0.16, nh: 0.10 },
-    { id: "confirm", nx: 0.810, ny: 0.359, nw: 0.18, nh: 0.07 },
-    { id: "back", nx: 0.12, ny: 0.20, nw: 0.16, nh: 0.08 }
-  ],
-  design: [
-    { id: "back", nx: 0.10, ny: 0.22, nw: 0.14, nh: 0.08 },
-    { id: "sil_fitted", nx: 0.652, ny: 0.692, nw: 0.08, nh: 0.04 },
-    { id: "sil_regular", nx: 0.746, ny: 0.692, nw: 0.08, nh: 0.04 },
-    { id: "sil_oversized", nx: 0.819, ny: 0.692, nw: 0.08, nh: 0.04 },
-    { id: "len_mini", nx: 0.661, ny: 0.620, nw: 0.08, nh: 0.04 },
-    { id: "len_midi", nx: 0.746, ny: 0.620, nw: 0.08, nh: 0.04 },
-    { id: "len_maxi", nx: 0.818, ny: 0.620, nw: 0.08, nh: 0.04 },
-    { id: "fabric", nx: 0.70, ny: 0.53, nw: 0.22, nh: 0.06 },
-    { id: "det_draped", nx: 0.62, ny: 0.431, nw: 0.08, nh: 0.04 },
-    { id: "det_asymmetric", nx: 0.70, ny: 0.431, nw: 0.09, nh: 0.04 },
-    { id: "det_open", nx: 0.772, ny: 0.431, nw: 0.09, nh: 0.04 },
-    { id: "det_slit", nx: 0.65, ny: 0.370, nw: 0.08, nh: 0.04 },
-    { id: "det_add", nx: 0.73, ny: 0.370, nw: 0.10, nh: 0.04 },
-    { id: "type", nx: 0.689, ny: 0.199, nw: 0.13, nh: 0.07 },
-    { id: "voice", nx: 0.827, ny: 0.199, nw: 0.13, nh: 0.07 }
-  ],
+  body: [],
+  measure: [],
+  design: [],
   generate: [],
-  preview: [
-    { id: "approve", nx: 0.839, ny: 0.213, nw: 0.19, nh: 0.06 },
-    { id: "back", nx: 0.10, ny: 0.22, nw: 0.14, nh: 0.08 }
-  ],
-  fabric: [
-    { id: "nextPiece", nx: 0.904, ny: 0.232, nw: 0.15, nh: 0.07 },
-    { id: "back", nx: 0.10, ny: 0.24, nw: 0.14, nh: 0.08 }
-  ]
+  preview: [],
+  fabric: []
 };

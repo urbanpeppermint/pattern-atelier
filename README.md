@@ -11,6 +11,8 @@
 
 **AI-powered sewing pattern maker for Snap Spectacles.** Start from any garment, customize it as far as you want, and draft **cut-ready patterns at 1:1 real-world scale** onto fabric in the room.
 
+Publication-safe plates: no human figures in textures; titles and CTAs are native Lens components. See [`docs/compliance/RESUBMIT_FIX.md`](docs/compliance/RESUBMIT_FIX.md).
+
 Patterning is the part of sewing that usually stops people: commercial patterns are expensive and hard to change, paper drafting is slow, and even the 3D path (Clo3D and similar) can take days to produce a usable 2D block. This lens keeps you in a conversation with the spec until the piece is actually yours, then puts the sheet on a table.
 
 <p align="center">
@@ -42,7 +44,7 @@ This repository no longer has a `main` 5.23 branch. The higher Studio line lives
 3. **Body / Measure** — woman or man profile, then size / measurements.
 4. **Design** — pick silhouette, length, fabric, details; keep a typed or spoken style note. Confirm to continue.
 5. **Preview** — approve the look before cutting.
-6. **Fabric** — pinch a detected surface; the board sits flat. Match the on-board **10 cm** square to a physical ruler, tap **CONFIRM** (locks true-size scale), then **PIN**. Piece labels show **width × height in cm**. **Yellow = cut**, **white = seam**.
+6. **Fabric** — pinch a detected surface; the board sits flat. **Yellow = cut**, **white = seam**. Pinch **MOVE** to slide the sheet on that surface, then **PIN** when position and rotation are right.
 
 An **A · ASSISTANT** strip speaks short guidance (TTS when Remote Service Gateway is configured). No cartoon mascot.
 
@@ -62,8 +64,7 @@ Fewer purchased envelopes that were never quite right, and fewer samples cut for
 - **Remote Service Gateway 1.0.1** — OpenAI speech for the assistant; paste your own tokens (placeholders in git)
 - **ASR** for voice input (keyboard fallback in the editor)
 - Parametric blocks in-repo: bodice, skirt, circle skirt, sleeve, shirt, plus extra blocks in `MoreBlocks.ts`
-- World Query to sit the board on a real surface; **10 cm ruler calibration** + grab + pin after placement
-- Piece dimension labels (cm) on each pattern piece for a quick tape-measure check
+- World Query to sit the board on a real surface; grab + pin after placement
 - Editorial mockup boards + UI art by [Florencia Raffa](https://github.com/floraraffa) ([@floraraffa](https://github.com/floraraffa))
 
 Packages and pins: [`PACKAGES.md`](PACKAGES.md). Rebuild notes: [`docs/5.15-demo/README.md`](docs/5.15-demo/README.md).

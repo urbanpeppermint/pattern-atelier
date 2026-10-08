@@ -22,3 +22,7 @@ Cache/
 .clad/
 .cursor/
 .publish-main/
+
+.rejected_screens_backup/
+Assets/UI/Atelier/fixed/
+Assets/UI/Atelier/clean/
