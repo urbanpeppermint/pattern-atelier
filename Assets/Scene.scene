@@ -715,7 +715,6 @@
   Enabled: true
   ScriptAsset: !<reference> d1b5ce1e-f6cb-4c20-afe6-dc60f96d83cc
   ScriptInputsDefault:
-      calibratorMaterial: !<reference.Material> 8af93db2-2104-4ec7-a86a-bda06456d429
     demoSeed: true
   ScriptTypesDefault:
     {}
@@ -1654,9 +1653,9 @@
     {}
   ScriptInputs:
     "":
-      openAIToken: 1826114e-7f33-4d64-849a-8a46c0b91a18
-      googleToken: 9a328a35-72de-467f-898c-263d2c23320b
-      snapToken: 54663df8-4134-4dae-950a-c5fe165ae947
+      openAIToken: "[INSERT OPENAI TOKEN HERE]" OPENAI TOKEN HERE]"
+      googleToken: "[INSERT GOOGLE TOKEN HERE]" GOOGLE TOKEN HERE]"
+      snapToken: "[INSERT SNAP TOKEN HERE]" SNAP TOKEN HERE]"
   ScriptTypes:
     "":
       {}
@@ -2051,6 +2050,7 @@
   ScriptInputs:
     "":
       stickerMaterial: !<reference.Material> 953553ad-0a5b-4b5b-88a4-9afee45f6b6c
+      buttonGlassMaterial: !<reference.Material> c4e8f2a1-7b39-4d6e-9c10-2a5f8d4e6b71
       boardWidthCm: !<float> 58.000000
       screenLanding: !<reference.Texture> 1a8db974-b8fc-4b87-89e2-97e7ba53fd99
       screenGarment: !<reference.Texture> ad760bb7-6352-4da4-8d1a-15d910f0dff2

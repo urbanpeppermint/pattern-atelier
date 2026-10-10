@@ -11,7 +11,7 @@
 
 **AI-powered sewing pattern maker for Snap Spectacles.** Start from any garment, customize it as far as you want, and draft **cut-ready patterns at 1:1 real-world scale** onto fabric in the room.
 
-Publication-safe plates: no human figures in textures; titles and CTAs are native Lens components. See [`docs/compliance/RESUBMIT_FIX.md`](docs/compliance/RESUBMIT_FIX.md).
+Publication policy (v2): humans on plates only when modestly dressed; titles/CTAs are native Lens components on blank zones. CTA chips use **`UiButtonGlass`**, separate from the landing sticker material. See [`docs/compliance/RESUBMIT_FIX.md`](docs/compliance/RESUBMIT_FIX.md) and [`FIX_INSTRUCTIONS_FOR_CURSOR.md`](FIX_INSTRUCTIONS_FOR_CURSOR.md).
 
 Patterning is the part of sewing that usually stops people: commercial patterns are expensive and hard to change, paper drafting is slow, and even the 3D path (Clo3D and similar) can take days to produce a usable 2D block. This lens keeps you in a conversation with the spec until the piece is actually yours, then puts the sheet on a table.
 

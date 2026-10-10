@@ -1,13 +1,14 @@
-// Full-bleed atelier UI face: clean background plates + native labels/CTAs
-// over blank zones. Hotspots stay invisible; text is never baked into textures
-// (Snap rejection: sexual content in raster mockups).
+// Full-bleed atelier UI face: v2 dressed-human plates + native labels/CTAs
+// over blank zones. Text is never baked into textures.
+// Landing board uses stickerMaterial; interactive chips use buttonGlassMaterial.
 
 import { makeLabel, makePlate, makeSticker, makeTappable, resetLocal, safeDestroy } from "./UiLite";
 
 const INK = new vec4(0.08, 0.07, 0.05, 1);
 const MUTED = new vec4(0.49, 0.46, 0.42, 1);
-const PAPER = new vec4(0.93, 0.90, 0.85, 0.94);
-const DARK = new vec4(0.08, 0.07, 0.05, 0.94);
+/** Frosted chip fill (matches UiButtonGlass default). */
+const GLASS = new vec4(0.91, 0.882, 0.831, 0.42);
+const GLASS_SOLID = new vec4(0.08, 0.07, 0.05, 0.78);
 const WHITE = new vec4(0.96, 0.94, 0.90, 1);
 
 export type AtelierScreenId =
@@ -31,7 +32,12 @@ export interface Hotspot {
 
 @component
 export class AtelierFace extends BaseScriptComponent {
+  /** Opaque / textured plate for the full-bleed screen board (landing look). */
   @input stickerMaterial: Material;
+  /** Semi-glass for native CTA chips — distinct from landing sticker. */
+  @input
+  @allowUndefined
+  buttonGlassMaterial: Material;
   @input
   @allowUndefined
   boardWidthCm: number = 58;
@@ -183,13 +189,20 @@ export class AtelierFace extends BaseScriptComponent {
     this.addNativeChrome(id, w, h);
   }
 
+  private chipMaterial(): Material {
+    if (this.buttonGlassMaterial !== undefined && !isNull(this.buttonGlassMaterial)) {
+      return this.buttonGlassMaterial;
+    }
+    return this.stickerMaterial;
+  }
+
   /** Titles + CTA chips drawn in Lens (not in the plate texture). */
   private addNativeChrome(id: AtelierScreenId, w: number, h: number) {
     if (this.hits === null) {
       return;
     }
     const host = this.hits;
-    const mat = this.stickerMaterial;
+    const glass = this.chipMaterial();
 
     const title = (text: string, nx: number, ny: number, size: number) => {
       const t = makeLabel(host, text, size, new vec3((nx - 0.5) * w, (ny - 0.5) * h, 0.9), INK);
@@ -202,9 +215,9 @@ export class AtelierFace extends BaseScriptComponent {
       return t;
     };
     const chip = (label: string, nx: number, ny: number, ww: number, hh: number, hid: string, solid: boolean) => {
-      const color = solid ? DARK : PAPER;
+      const color = solid ? GLASS_SOLID : GLASS;
       const ink = solid ? WHITE : INK;
-      const plate = makePlate(host, "chip_" + hid, ww, hh, this.tint(mat, color));
+      const plate = makePlate(host, "chip_" + hid, ww, hh, this.tint(glass, color));
       plate.getTransform().setLocalPosition(new vec3((nx - 0.5) * w, (ny - 0.5) * h, 0.85));
       const rmv = plate.getComponent("Component.RenderMeshVisual") as RenderMeshVisual;
       if (rmv !== null && !isNull(rmv)) {
